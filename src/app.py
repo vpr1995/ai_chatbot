@@ -17,6 +17,7 @@ from langchain_core.chat_history import BaseChatMessageHistory
 
 logging.set_verbosity(logging.CRITICAL)
 
+
 class DocumentProcessor:
     def __init__(self, file_path):
         self.file_path = file_path
@@ -26,16 +27,19 @@ class DocumentProcessor:
     def load_and_split(self):
         print("Loading the document...")
         self.docs = self.loader.load_and_split(
-            text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+            text_splitter=RecursiveCharacterTextSplitter(
+                chunk_size=1000, chunk_overlap=100)
         )
         print("Document loaded and split successfully.")
         return self.docs
+
 
 class VectorStoreManager:
     def __init__(self, docs):
         self.docs = docs
         self.embeddings = HuggingFaceEmbeddings()
-        self.index = faiss.IndexFlatL2(len(self.embeddings.embed_query("hello world")))
+        self.index = faiss.IndexFlatL2(
+            len(self.embeddings.embed_query("hello world")))
         self.vector_store = FAISS(
             embedding_function=self.embeddings,
             index=self.index,
@@ -49,6 +53,7 @@ class VectorStoreManager:
         self.vector_store.add_documents(documents=self.docs, ids=self.uuids)
         print("Documents added successfully.")
         return self.vector_store
+
 
 class Chatbot:
     def __init__(self, vector_store):
@@ -90,8 +95,10 @@ class Chatbot:
                 ("human", "{input}"),
             ]
         )
-        self.question_answer_chain = create_stuff_documents_chain(self.llm, self.qa_prompt)
-        self.rag_chain = create_retrieval_chain(self.history_aware_retriever, self.question_answer_chain)
+        self.question_answer_chain = create_stuff_documents_chain(
+            self.llm, self.qa_prompt)
+        self.rag_chain = create_retrieval_chain(
+            self.history_aware_retriever, self.question_answer_chain)
 
         self.conversational_rag_chain = RunnableWithMessageHistory(
             self.rag_chain,
@@ -124,8 +131,10 @@ class Chatbot:
             response = self.return_response(query)
             print(f"\033[1m Chatbot >>: \033[0m {response}")
 
+
 if __name__ == "__main__":
-    document_processor = DocumentProcessor(file_path="./files/3ef5a4_7f4ef254977c43bcb4bc6790d37ac0ff.pdf")
+    document_processor = DocumentProcessor(
+        file_path="./files/3ef5a4_7f4ef254977c43bcb4bc6790d37ac0ff.pdf")
     docs = document_processor.load_and_split()
 
     vector_store_manager = VectorStoreManager(docs)
