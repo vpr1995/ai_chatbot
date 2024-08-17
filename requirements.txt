@@ -1,0 +1,16 @@
+python-dotenv
+torch
+transformers
+huggingface_hub
+bitsandbytes~=0.42.0; sys_platform == 'darwin'
+bitsandbytes~=0.43.1; 'darwin' not in sys_platform 
+accelerate
+pypdf
+tiktoken
+sentence-transformers
+faiss-cpu
+langchain
+streamlit
+langchain_community
+langchain_huggingface
+langchain_ollama
