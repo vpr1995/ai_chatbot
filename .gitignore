@@ -122,3 +122,7 @@ zap/
 */*/.gitignore
 */*/setup.py
 */*/source.bat
+
+models/
+virtual/
+files/
