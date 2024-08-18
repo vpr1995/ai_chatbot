@@ -50,7 +50,7 @@ This project implements a Conversational Retrieval-Augmented Generation (RAG) Ch
 
 ## Project Structure
 
-- `app.py`: Main application file containing the implementation of the DocumentProcessor, VectorStoreManager, and Chatbot classes.
+- `src/`: Direcory containing the implementation of the DocumentProcessor, VectorStoreManager, and Chatbot classes etc.
 - `files/`: Directory to store the PDF documents to be processed.
 - `requirements.txt`: List of dependencies required for the project.
 
