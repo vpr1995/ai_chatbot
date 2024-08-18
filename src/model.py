@@ -3,7 +3,6 @@ from utils.logger import logger
 from transformers import logging
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
-from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_ollama import ChatOllama
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
@@ -11,6 +10,7 @@ from langchain.chains.history_aware_retriever import (
     create_history_aware_retriever
 )
 from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_community.chat_message_histories import SQLChatMessageHistory
 
 logging.set_verbosity(logging.CRITICAL)
 
@@ -74,9 +74,8 @@ class Chatbot:
         )
 
     def get_session_history(self, session_id: str) -> BaseChatMessageHistory:
-        if session_id not in self.store:
-            self.store[session_id] = ChatMessageHistory()
-        return self.store[session_id]
+        return SQLChatMessageHistory(session_id,
+                                     connection="sqlite:///messages.db")
 
     def return_response(self, user_query):
         response = self.conversational_rag_chain.invoke(
@@ -85,19 +84,38 @@ class Chatbot:
         )
         return response["answer"]
 
-    def start_chat(self):
+    def start_chat(self, session_id="session_1"):
         print("====================================================")
         print("Conversational RAG Chatbot")
         print("====================================================")
 
+        self.print_previous_chat(session_id)
         query = ""
+
         while query != "bye":
             query = input("\033[1m User >>: \033[0m")
             try:
                 response = self.return_response(query)
-                print(f"\033[1m Chatbot >>: \033[0m {response}")
+                self.chatbot_message_print(response)
             except Exception as e:
                 logger.error(f"An error occurred: {e}")
-                print(
-                    "\033[1m Chatbot >>: \033[0m Ran into an issue. "
+                self.chatbot_message_print(
+                    "Sorry, I am unable to answer that question."
                     "Please try again.")
+
+    def print_previous_chat(self, session_id):
+        for message in self.get_session_history(session_id).messages:
+            message = message.dict()
+
+            if message["type"] == "human":
+                self.human_message_print(message["content"])
+            elif message["type"] == "ai":
+                self.chatbot_message_print(message["content"])
+            else:
+                logger.error("Invalid message type")
+
+    def human_message_print(self, message):
+        print(f"\033[1m User >>: \033[0m {message}")
+
+    def chatbot_message_print(self, message):
+        print(f"\033[1m Chatbot >>: \033[0m {message}")

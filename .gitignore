@@ -127,3 +127,5 @@ models/
 virtual/
 files/
 vector_store/
+
+*.db
