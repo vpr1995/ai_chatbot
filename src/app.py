@@ -1,8 +1,13 @@
 from model import Chatbot
+from utils.db import dbClient
 from vector_store import VectorStoreManager
 from document_loader import DocumentProcessor
 
 if __name__ == "__main__":
+
+    client = dbClient()
+    client.setup_tables()
+
     document_processor = DocumentProcessor(
         directory_path="files/")
     docs = document_processor.load_and_split()
