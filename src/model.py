@@ -1,4 +1,5 @@
 
+from utils.logger import logger
 from transformers import logging
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -92,5 +93,11 @@ class Chatbot:
         query = ""
         while query != "bye":
             query = input("\033[1m User >>: \033[0m")
-            response = self.return_response(query)
-            print(f"\033[1m Chatbot >>: \033[0m {response}")
+            try:
+                response = self.return_response(query)
+                print(f"\033[1m Chatbot >>: \033[0m {response}")
+            except Exception as e:
+                logger.error(f"An error occurred: {e}")
+                print(
+                    "\033[1m Chatbot >>: \033[0m Ran into an issue. "
+                    "Please try again.")

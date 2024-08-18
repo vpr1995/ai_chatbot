@@ -9,6 +9,7 @@ if __name__ == "__main__":
 
     vector_store_manager = VectorStoreManager(docs)
     vector_store = vector_store_manager.add_documents()
+    vector_store_manager.persist_on_disk()
 
     chatbot = Chatbot(vector_store)
     chatbot.start_chat()

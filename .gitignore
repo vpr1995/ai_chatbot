@@ -126,3 +126,4 @@ zap/
 models/
 virtual/
 files/
+vector_store/
