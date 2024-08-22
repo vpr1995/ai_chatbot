@@ -84,51 +84,31 @@ Creating a new vector store...
 ====================================================
 Conversational RAG Chatbot
 ====================================================
- User >>: Hi
- Chatbot >>:  How can I assist you with your garage door opener installation or troubleshooting today?
- User >>: I need to install the wall console for my garage door opener            
- Chatbot >>:  To ensure a safe and proper installation, let's go through some steps together.
+ User >>: hi
+ Chatbot >>:  Hello! Welcome to our garage door opener support team. How can I assist you today? Are you experiencing any issues with your garage door opener or do you have a question about installation?
+ User >>: I need your help in installing wall console to the garage door opener. can you provide detailed steps ?
+ Chatbot >>:  Installing the wall console is an important part of setting up your garage door opener. Here are the detailed steps:
 
-Before installing the wall console, have you checked that there is an electrical outlet within approximately 3 feet of where the opener will be installed? If not, you'll need to contact a licensed electrician to install one.
+**Step 8: Installing the Wall Console**
 
-Also, please make sure the door and its associated hardware (tracks, springs, hinges, rollers) are in good condition. Is anything loose or worn out? If so, it's best to have a trained professional evaluate and repair them before proceeding with the installation.
+* Use garage pre-wiring if available.
+* Otherwise, route supplied wire from powerhead to the desired location for the wall control. Secure wire with insulated staples (green bag).
+* On the powerhead:
+        + Insert wire down through the control wire channel.
+        + Remove 1/4" insulation from white and striped wire.
+        + Using a small flat head screwdriver, press in the orange tab and insert the white wire in terminal 3 and the striped wire in terminal 4. Ensure the wires are secure in each terminal; adjust as necessary.
+* At the wall console end of the wire:
+        + Remove 1/4" insulation from the white and striped wires.
+        + Secure the white wire to the "W" terminal and the striped wire to the "B/W" terminal as shown. Ensure the wires are secure at each terminal; adjust as necessary.
+* Mark the wall console mounting holes, drill 3/32" pilot holes, and mount with #6 x 1-1/4" screws. If mounting to drywall, anchors will be required (not provided).
+* Post the "ENTRAPMENT WARNING LABEL" next to the wall console.
 
-Additionally, you'll need to remove all ropes and disable any locks connected to the garage door, as well as recommended T-handles.
+**Important Notes:**
 
-Once you've taken care of these steps, we can proceed with installing the wall console. Would you like me to guide you through that process?
- User >>: I am ready
- Chatbot >>:  To install the wall console, please follow these steps:
+* Use of any other wall control can cause unexpected operation of the door and loss of lighting feature.
+* Locate wall console within sight of door and far enough from door to prevent contacting it while operating the console. Control must be at least 5 feet above floor to prevent small children from operating it.
 
-1. **Locate a suitable spot**: Place the wall console within sight of the garage door and far enough from it so that you don't accidentally touch it while operating the console. It's also essential to ensure the control is at least 5 feet above the floor to prevent small children from operating it.
-2. **Post the Entrapment Warning Label**: Attach the provided "ENTRAPMENT WARNING LABEL" next to the wall console, as this will serve as a reminder of the importance of proper installation and usage.
-
-Now, regarding the wiring, please follow these additional steps:
-
-1. **Strip 1/4” of insulation from the wires**: You'll need to strip a small portion of the insulation from both the wire going to the Photocells (see section on wiring) and the wire going to the wall control.
-2. **Insert the wires into their respective connectors**: Make sure to push in on the tabs to insert the wires correctly.
-
-If you're not comfortable with this process or have any doubts, please let me know, and I'll be happy to guide you further.
-
-Are these steps clear? Or would you like me to clarify anything?
- User >>: how to fix the wall console to wall ?
- Chatbot >>:  To mount the wall console to the wall, follow these steps:
-
-1. **Mark the wall console mounting holes**: Identify the holes on the back of the wall console where the screws will go.
-2. **Drill 3/32" pilot holes into the wall**: Use a drill to create small pilot holes in the wall at the marked spots. This will help prevent the drywall from cracking when you screw it in.
-3. **Mount with #6 x 1-1/4" screws**: Insert the provided screws into the pilot holes and tighten them securely.
-
-**Important Note:** If you're mounting the wall console to drywall, you'll need to use anchors (not provided) to ensure a secure hold. These can be purchased at most hardware stores or home improvement centers.
-
-Before proceeding with this step, double-check that the wall console is level and plumb on the wall. Make any necessary adjustments before securing it in place.
-
-Is there anything else I can help you with regarding the installation of your garage door opener?
- User >>: I think I got what I need. Thanks for your help
- Chatbot >>:  You're welcome! It was my pleasure to assist you. If you have any other questions or concerns, don't hesitate to reach out.
-
-Remember to refer back to the manual if you need further clarification on any of the steps. And if you're ever unsure about something, it's always best to consult a professional.
-
-Have a great day, and I hope your garage door opener installation goes smoothly!
- User >>: bye
- Chatbot >>:  Bye! Have a great day!
-
+If you have any questions or concerns during this process, feel free to ask!
+ User >>: bye 
+ Chatbot >>:  It was nice assisting you with your garage door opener installation and troubleshooting needs. If you have any other questions or need further assistance in the future, don't hesitate to reach out. Have a great day! Bye!
 ```
