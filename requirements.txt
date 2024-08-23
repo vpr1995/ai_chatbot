@@ -14,3 +14,4 @@ streamlit
 langchain_community
 langchain_huggingface
 langchain_ollama
+nemoguardrails

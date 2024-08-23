@@ -1,0 +1,9 @@
+models:
+ - type: self_check_input
+   engine: ollama
+   model: llama-3.1
+
+rails:
+  input:
+    flows:
+      - self check input

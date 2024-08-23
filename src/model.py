@@ -1,9 +1,11 @@
 
+from nemoguardrails.integrations.langchain.runnable_rails import RunnableRails
+from nemoguardrails import RailsConfig
 from utils.logger import logger
 from transformers import logging
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
-from langchain_ollama import ChatOllama
+from langchain_ollama import ChatOllama, OllamaLLM
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.history_aware_retriever import (
@@ -13,13 +15,16 @@ from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_community.chat_message_histories import SQLChatMessageHistory
 
 logging.set_verbosity(logging.CRITICAL)
+config = RailsConfig.from_path("src/nemo-config")
 
 
 class Chatbot:
     def __init__(self, vector_store):
         self.vector_store = vector_store
         self.retriever = self.vector_store.as_retriever()
-        self.llm = ChatOllama(model="llama3.1", temperature=0.2)
+        self.llm = ChatOllama(model="llama3.1", temperature=0.6, seed=42)
+        self.guardrails = RunnableRails(
+            config, llm=OllamaLLM(model='llama3.1'), output_key="answer")
         self.store = {}
 
         self.contextualize_q_system_prompt = (
@@ -91,12 +96,14 @@ class Chatbot:
             output_messages_key="answer",
         )
 
+        self.guardrail_rag_chain = self.guardrails | self.conversational_rag_chain
+
     def get_session_history(self, session_id: str) -> BaseChatMessageHistory:
         return SQLChatMessageHistory(session_id,
                                      connection="sqlite:///messages.db")
 
     def return_response(self, user_query):
-        response = self.conversational_rag_chain.invoke(
+        response = self.guardrail_rag_chain.invoke(
             {"input": user_query},
             {"configurable": {"session_id": "session_1"}},
         )
