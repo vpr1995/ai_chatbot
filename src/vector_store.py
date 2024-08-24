@@ -1,6 +1,7 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+
 from uuid import uuid4
 import faiss
+from langchain_ollama import OllamaEmbeddings
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
 from utils.logger import logger
@@ -9,7 +10,7 @@ from utils.logger import logger
 class VectorStoreManager:
     def __init__(self, docs):
         self.docs = docs
-        self.embeddings = HuggingFaceEmbeddings()
+        self.embeddings = OllamaEmbeddings(model="llama3.1")
         self.persist_on_disk_path = "vector_store"
         self.index = faiss.IndexFlatL2(
             len(self.embeddings.embed_query("hello world")))
